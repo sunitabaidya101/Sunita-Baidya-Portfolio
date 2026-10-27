@@ -1,0 +1,55 @@
+/* Scroll-controlled cinematic background */
+#scroll-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #07111d;
+}
+
+#scroll-frame-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0.80;
+}
+
+/* Keep text readable over the moving footage */
+#scroll-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(7, 17, 29, 0.18),
+      rgba(7, 17, 29, 0.08) 55%,
+      rgba(7, 17, 29, 0.16)),
+    linear-gradient(180deg,
+      rgba(7, 17, 29, 0.08),
+      rgba(7, 17, 29, 0.12));
+}
+
+/* Keep the site content above the fixed canvas */
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 720px) {
+  #scroll-frame-canvas {
+    opacity: 0.82;
+  }
+
+  #scroll-scene::after {
+    background: rgba(7, 17, 29, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #scroll-frame-canvas {
+    opacity: 0.65;
+  }
+}
